@@ -19,6 +19,20 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("common"))
-app.use(bodyparser.json());
-app.use(bodyparser.urlencoded({ extended: true }));
+app.use(morgan("common"));
+app.use(bodyparser.json({limit: "30mb", extended: true}));
+app.use(bodyparser.urlencoded({limit: "30mb", extended: true }));
+app.use(cors());
+app.use('/assets', express.static(path.join(__dirname, 'public/assets')));
+
+//file storage
+const fileStorageEngin = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/assets')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname)
+    }
+});
+
+const upload = multer({ storage: fileStorageEngin });
