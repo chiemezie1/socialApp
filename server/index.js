@@ -35,4 +35,4 @@ const fileStorageEngin = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: fileStorageEngin });
+const upload = multer({storage: fileStorageEngin});
