@@ -3,7 +3,7 @@ import {getFeedposts, getUserPosts, likePost} from "../controllers/posts.js";
 import { verifyToken } from "../middleware/auth.js";
 
 
-const routeer = express.Router();
+const router = express.Router();
 
 //Read
 router.get('/', verifyToken, getFeedposts);
